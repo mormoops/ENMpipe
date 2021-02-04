@@ -15,5 +15,7 @@ Uses for different steps of the pipe include:
 ```
 
 This ENMpipe was developed and is currently maintained by: 
+
 Angelo Soto-Centeno
+
 Rutgers University – Newark
