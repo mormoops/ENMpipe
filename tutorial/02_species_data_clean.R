@@ -75,5 +75,5 @@ data("wrld_simpl")
 plot(wrld_simpl, xlim = c(min, max), ylim = c(min, max), axes = TRUE, col = NA)
       # replace "min" and "max" with the upper and lower limits of the desiered lon/lat coordinates
 
-    # add species observation points
+    # add species observation localities
 points(x = sp$lon, y = sp$lat, col = "red", pch = 20, cex = 0.75)
