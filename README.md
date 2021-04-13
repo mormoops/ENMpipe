@@ -13,4 +13,4 @@ Uses for different steps of the pipe include:
 - estimates of niche overlap and quantification of niche dynamics
 
 
-Pipe scripts and tutorial under construction. Maintained by: ASC
+Pipe scripts and tutorial under construction. Maintained by: @Mormoops
