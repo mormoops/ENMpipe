@@ -58,7 +58,7 @@ thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.co
       # Plot 3: Gives you the frequency of the maximum records retained
 
 # import the thinned dataset to proceed (assuming files are in home directory)
-  # "*thin1.csv" shown as example. choose appropriate thinned dataset to import
+  # "*thin1.csv" shown as example. choose appropriate directory and thinned dataset to import
 sp <- read.csv(file = "/thin_sp1/sp1_thin1.csv", header = T)
 
 
