@@ -20,7 +20,7 @@ sum(!is.na(sp1$lon))
 
   # create a new data.frame with complete records
 sp1.com <- sp1 %>% filter(!is.na(lon)) 
- # optional: create a new data.frame with records with missing data (needs georeferencing)
+ # optional: create a new data.frame with records that have missing data (needs georeferencing)
 sp1.mis <- sp1 %>% filter(is.na(lon))
 
   # eliminate duplicates
@@ -33,3 +33,5 @@ unique(sp1$country)
     # use this information for 2 things:
       # first: create a filter of countries to map the distribution
       # second: as a modeling goal, predict which areas have suitable environmental features for this species
+
+
