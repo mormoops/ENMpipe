@@ -48,7 +48,15 @@ head(sp1.com)
   # create a thinned dataset
 thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.col = "species", 
                   thin.par = 10, reps = 50, locs.thinned.list.return = T, write.files = T, 
-                  max.files = 5, out.dir = "sp1_Thinned/", out.base = "sp1_Thinned", 
-                  write.log.file = TRUE, log.file = "sp1_Thinned/sp1_log.txt")
+                  max.files = 5, out.dir = "thin_sp1/", out.base = "sp1", 
+                  write.log.file = TRUE, log.file = "thin_sp1_log.txt")
     # NOTES: the thinning parameter (thin.par) controls the spatial distance in km between species observations
-      # use knowledge of your species to set the thinning parameter 
+      # use knowledge of your species and the spacial resolution of covariates to set the thinning parameter 
+      # reps indicates the number of iterations assigned. must run enough reps to ensure convergence
+      # Plot 1: Gives you the number of records retained per iteration
+      # Plot 2: Is the same as Plot 1 but with a log scale, so that it is easier to see if too many points or too many iterations are used
+      # Plot 3: Gives you the frequency of the maximum records retained
+
+# import the thinned dataset to proceed (assuming files are in home directory)
+  # "*thin1.csv" shown as example. choose appropriate thinned dataset to import
+sp <- read.csv(file = "/thin_sp1/sp1_thin1.csv", header = T)
