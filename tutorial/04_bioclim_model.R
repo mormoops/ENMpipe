@@ -34,7 +34,7 @@ data("wrld_simpl")
   # plot map
 plot(wrld_simpl, xlim = c(-86, -65), ylim = c(16, 26), axes = TRUE, col = NA, add = T)
 
-  # OPTIONAL: add species localities
+  # OPTIONAL: add species observation localities
 points(sp$lon, sp$lat, col = "black", pch = 20, cex = 0.75)
 
 
