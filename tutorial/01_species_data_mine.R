@@ -1,5 +1,5 @@
 ###
-  ## mining & downloading spatial data: GBIF
+  ## mining & downloading spatial data: GBIF (www.gbif.org)
 library(dismo)
   # GBIF: simple query - 
   # choose your favorite species to query the database
