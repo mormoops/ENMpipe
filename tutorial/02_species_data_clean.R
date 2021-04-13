@@ -37,7 +37,18 @@ unique(sp1$country)
 
 ### 
   # reduce spatial autocorrelation
-    # observation records are often spatially autocorrelated, a bit of extra clean up is needed to reduce collinearity issues
+    # observation records are often spatially autocorrelated due to uneven or biased species sampling
     # this will further reduce your dataset
 
 library(spThin)
+
+  # verify the data
+head(sp1.com)
+
+  # create a thinned dataset
+thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.col = "species", 
+                  thin.par = 10, reps = 50, locs.thinned.list.return = T, write.files = T, 
+                  max.files = 5, out.dir = "sp1_Thinned/", out.base = "sp1_Thinned", 
+                  write.log.file = TRUE, log.file = "sp1_Thinned/sp1_log.txt")
+    # NOTES: the thinning parameter (thin.par) controls the spatial distance in km between species observations
+      # use knowledge of your species to set the thinning parameter 
