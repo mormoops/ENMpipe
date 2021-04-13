@@ -28,6 +28,7 @@ plot(bioclim.data$bio1)
   # import rasters from specific directory
 raster_files <- list.files("~/PATH/NAME", full.names = T, pattern = ".tif")
     # the pattern argument can help find different types of rasters (e.g. *.tif, *.bil, etc.) depending on the file format
+    # NOTE: because this is a pattern matching, make sure to erase the *bil.zip file from the earlier download
 
   # create a raster stack of bioclim predictors
 predictors <- stack(raster_files)
