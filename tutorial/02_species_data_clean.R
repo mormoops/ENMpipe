@@ -1,6 +1,7 @@
 ### 
   # basic wrangling to clean-up species observation data
     # note: this requires no georeferencing. it assumes that a statistically significant number of records exist for the species to be analyzed
+
  library(tidyverse)
   # list columns to select what to keep
 colnames(sp)
