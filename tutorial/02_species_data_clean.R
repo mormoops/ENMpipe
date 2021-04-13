@@ -60,3 +60,20 @@ thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.co
 # import the thinned dataset to proceed (assuming files are in home directory)
   # "*thin1.csv" shown as example. choose appropriate thinned dataset to import
 sp <- read.csv(file = "/thin_sp1/sp1_thin1.csv", header = T)
+
+
+### 
+  # basic mapping to identify point density and outliers
+  # uses base R mapping
+
+library(maptools)
+
+    # get map data
+data("wrld_simpl")
+
+    # plot a base map
+plot(wrld_simpl, xlim = c(min, max), ylim = c(min, max), axes = TRUE, col = NA)
+      # replace "min" and "max" with the upper and lower limits of the desiered lon/lat coordinates
+
+    # add species observation points
+points(x = sp$lon, y = sp$lat, col = "red", pch = 20, cex = 0.75)
