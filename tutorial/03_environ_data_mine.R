@@ -24,3 +24,15 @@ plot(bioclim.data$bio1)
 
 ### 
   ## upload and wrangle already downloaded bioclim data predictors
+
+  # import rasters from specific directory
+raster_files <- list.files("~/PATH/NAME", full.names = T, pattern = ".tif")
+    # the pattern argument can help find different types of rasters (e.g. *.tif, *.bil, etc.) depending on the file format
+
+  # create a raster stack of bioclim predictors
+predictors <- stack(raster_files)
+
+  # examine the uploaded raster files
+plot(predictors$RASTER-NAME)
+    # the raster name may vary depending on the raster data names
+  # NOTES: once uploaded, create a geo.extent and crop predictors (i.e. line 14 to 22 above)
