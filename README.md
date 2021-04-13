@@ -1,4 +1,4 @@
-## ENMpipes
+## ENMpipe
 #### A pipeline for developing and testing Ecological Niche Models (ENM): from data mining to pub ready plots.
 
 This ENMpipe is fully implemented in R using many open access packages to download, process, analyze, and visualize spatial data. The scripts are well annotated and will need little technical knowledge other than R basics and require a bit of thinking about the parameters that are being set. The pipleline is organized in two ways: 1. as a fully annotated *tutorial* of independednt steps that can be executed in stages (for beginners), and 2. a semi-annotated & streamlined *full* script (more advanced).
@@ -13,4 +13,4 @@ Uses for different steps of the pipe include:
 - estimates of niche overlap and quantification of niche dynamics
 
 
-Pipe scripts under construction. Maintained by: ASC
+Pipe scripts and tutorial under construction. Maintained by: ASC
