@@ -35,3 +35,9 @@ unique(sp1$country)
       # second: as a modeling goal, predict which areas have suitable environmental features for this species
 
 
+### 
+  # reduce spatial autocorrelation
+    # observation records are often spatially autocorrelated, a bit of extra clean up is needed to reduce collinearity issues
+    # this will further reduce your dataset
+
+library(spThin)
