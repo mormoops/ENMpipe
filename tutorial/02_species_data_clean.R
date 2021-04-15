@@ -24,8 +24,8 @@ sp1.com <- sp1 %>% filter(!is.na(lon))
 sp1.mis <- sp1 %>% filter(is.na(lon))
 
   # eliminate duplicates
-sp1.dups <- duplicated(sp1[, c("lon", "lat")]) # creae a duplicated set
-sp1 <- sp1[!sp1.dups, ] # remove the duplicated set from the original data.frame
+sp1.dups <- duplicated(sp1.com[ , c("lon", "lat")]) # creae a duplicated logical set from sp1.com identify identical records of lon/lat
+sp1 <- sp1.com[!sp1.dups, ] # remove the duplicated set from the complete data.frame & replace sp1
 
 
   # check the places where the species is distributed
@@ -43,10 +43,10 @@ unique(sp1$country)
 library(spThin)
 
   # verify the data
-head(sp1.com)
+head(sp1)
 
   # create a thinned dataset
-thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.col = "species", 
+thin_data <- thin(loc.data = sp1, lat.col = "lat", long.col = "lon", spec.col = "species", 
                   thin.par = 10, reps = 50, locs.thinned.list.return = T, write.files = T, 
                   max.files = 5, out.dir = "thin_sp1/", out.base = "sp1", 
                   write.log.file = TRUE, log.file = "thin_sp1_log.txt")
@@ -59,7 +59,7 @@ thin_data <- thin(loc.data = sp1.com, lat.col = "lat", long.col = "lon", spec.co
 
 # import the thinned dataset to proceed (assuming files are in home directory)
   # "*thin1.csv" shown as example. choose appropriate directory and thinned dataset to import
-sp <- read.csv(file = "/thin_sp1/sp1_thin1.csv", header = T)
+sp1 <- read.csv(file = "/thin_sp1/sp1_thin1.csv", header = T)
 
 
 ### 
@@ -76,4 +76,4 @@ plot(wrld_simpl, xlim = c(min, max), ylim = c(min, max), axes = TRUE, col = NA)
       # replace "min" and "max" with the upper and lower limits of the desiered lon/lat coordinates
 
     # add species observation localities
-points(x = sp$lon, y = sp$lat, col = "red", pch = 20, cex = 0.75)
+points(x = sp1$lon, y = sp1$lat, col = "red", pch = 20, cex = 0.75)
