@@ -16,10 +16,10 @@ plot(bioclim.data$bio1)
 geo.extent <- extent(-86, -65, 16, 27) # e.g. Greater Antilles
 
   # crop bioclim predictors to the geographic extent
-bioclim.data <- crop(bioclim.data, geo.extent)
+predictors <- crop(bioclim.data, geo.extent)
 
   # examine cropped raster files
-plot(bioclim.data$bio1)
+plot(predictors$RASTER-NAME)
 
 
 ### 
