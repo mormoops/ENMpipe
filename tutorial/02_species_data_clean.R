@@ -77,3 +77,54 @@ plot(wrld_simpl, xlim = c(min, max), ylim = c(min, max), axes = TRUE, col = NA)
 
     # add species observation localities
 points(x = sp1$lon, y = sp1$lat, col = "red", pch = 20, cex = 0.75)
+
+
+###
+# optional cleanup steps
+# examine any outliers & remove them (easy to remove a few indivudual points)
+
+# method 1: function "identify"
+identify(x = sp1$lon, y = sp1$lat) # hit escape to obtain results
+  # identify will return the row for the record, use bracket notation to get the info
+sp1[1535, ] # in this example, record 1535 is incorrectly georeferenced
+  # remove that specific row
+sp1 <- sp1[-c(1535), ]
+  # verify that the record is gone
+sp1[1535, ] # it must show a different record
+# repeat these steps for as many individual records as needed
+
+
+# method 2: using a shapefile
+  # wrangle data using the species range as a mask involves 4 steps: 
+      # 1. getting a shapefile, 
+      # 2. transforming observation data into spatial, 
+      # 3. crop observation data
+      # 4. back transform spatial observation data to a data.frame
+  # download species distribution shapefile from IUCN redlist (www.redlist.org)
+
+library(sf)
+library(rgdal)
+
+# read the shapefile
+rbPoly <- readOGR("dirname/filename.shp") # replace 'dirname' for the appropriate directory name and 'filename' for the appropriate name of the shape file
+# verify the polygon is OK
+plot(rbPoly)
+
+# convert species observations to spatial
+colnames(sp1)
+# extract lon lat coordinates
+xy <- sp1[, c(2:3)]
+summary(xy)
+# convert xy data.frame to sp
+spdf <- SpatialPointsDataFrame(coords = xy, data = sp1,
+                               proj4string = CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
+
+# crop the species observations to the polygon (package raster)
+rbmsk <- crop(spdf, rbPoly)
+#verify the points
+plot(rbmsk)
+# convert rbmsk to data.frame
+sp2 <- as.data.frame(rbmsk)
+# remove the extra lon lat variables
+sp2 <- sp2[, -c(4,5)]
+summary(sp2)
