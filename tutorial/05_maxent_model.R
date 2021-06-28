@@ -10,7 +10,6 @@ system.file("java", package = "dismo")
 ##       download the latest copy of maxent here: https://biodiversityinformatics.amnh.org/open_source/maxent/
 
 
-
 # fire up specific libraries (if not continuing from above)
 library(raster)
 library(maptools)
@@ -51,8 +50,7 @@ predictors <- crop(predictors, geo.extent)
 plot(predictors$wc2.1_2.5m_bio_1)
 
 
-
-# 4B.4. Create Maxent ENMs using default settings
+# Create Maxent ENMs using default settings
 
 # extract the Feature Classes from Maxent
 getFCs <- function(html) {
@@ -62,13 +60,12 @@ getFCs <- function(html) {
 }
 
 
-
 ## -- multiple model testing in maxent & determine best parameters in ENMeval
 setwd("~/MaxEnt/Outputs/") # make sure you are here
-## this must be one level up from the directory where maxent.html is
+  ## i.e. must be one level up from the directory where maxent.html is
 
 # create the Maxent model
-sp.mxnt.dflt <- maxent(predictors, xy, path = "./")
+sp.mxnt.dflt <- maxent(predictors, xy, path = "./") # point to the current directory
 
 # create a raster of your Maxent model prediction
 sp.dflt.dist <- predict(sp.mxnt.dflt, predictors, progress = 'text')
