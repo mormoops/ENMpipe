@@ -22,7 +22,7 @@ library(tidyverse)
 # create working directories to organize your data
 getwd()
 dir.create("./MaxEnt")
-dir.create("./Outputs")
+dir.create("./MaxEnt/Outputs")
 
 
 # get & wrangle species & environmental data
