@@ -77,3 +77,8 @@ plot(sp.dflt.dist)
   # use an independent measure for presence-only data: Boyce Index (Hizrel et al 2006) as implemented in Ecospat
 library(ecospat)
 ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
+  # boyce index statistic is the Spearman.cor value (= 0.991)
+    # goes between -1 to +1 
+    # positive vlaues = a model which present predictions are consistent with the distribution of presences in the evaluation dataset
+    # values near zero = the model is not different from a random model
+    # negative values = negative values indicate counter predictions, i.e., predicting poor quality areas where presences are more frequent
