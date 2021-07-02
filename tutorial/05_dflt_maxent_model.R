@@ -61,11 +61,11 @@ getFCs <- function(html) {
 
 
 ## -- multiple model testing in maxent & determine best parameters in ENMeval
-setwd("~/MaxEnt/Outputs/") # make sure you are here
+setwd("~/NEW_DIR1/NEW_DIR2/") # make sure you are here
   ## i.e. must be one level up from the directory where maxent.html is
 
 # create the Maxent model
-sp.mxnt.dflt <- maxent(predictors, xy, path = "./") # point to the current directory
+sp.mxnt.dflt <- maxent(predictors, xy, path = "./NEW_DIR3") # use path to create new directory
 
 # create a raster of your Maxent model prediction
 sp.dflt.dist <- predict(sp.mxnt.dflt, predictors, progress = 'text')
