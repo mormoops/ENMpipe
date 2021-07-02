@@ -14,7 +14,7 @@ system.file("java", package = "dismo")
 library(raster)
 library(maptools)
 library(dismo)
-library(rJava)
+library(rJava) # need 64-bit java version
 library(ENMeval)
 library(tidyverse)
 
