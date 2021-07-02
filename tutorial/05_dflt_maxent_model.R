@@ -43,7 +43,7 @@ predictors <- stack(raster_files)
 plot(predictors$wc2.1_2.5m_bio_1)
 
   # create regional extent (xmn, xmx, ymn, ymx)
-geo.extent <- extent(-125, -66, 24, 50)
+geo.extent <- extent(-125, -66, 24, 50) # example
   # crop predictors
 predictors <- crop(predictors, geo.extent)
   # verify by plotting one of the predictors
