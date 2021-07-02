@@ -21,8 +21,8 @@ library(tidyverse)
 
 # create working directories to organize your data
 getwd()
-dir.create("./MaxEnt")
-dir.create("./MaxEnt/Outputs")
+dir.create("./NEW_DIR1")
+dir.create("./NEW_DIR1/NEW_DIR2")
 
 
 # get & wrangle species & environmental data
