@@ -27,7 +27,7 @@ dir.create("./NEW_DIR1/NEW_DIR2")
 
 # get & wrangle species & environmental data
 # species records
-sp <- read.csv(file = "summerREU/sp2.csv", header = T)
+sp <- read.csv(file = "DATA_DIR/DATA.csv", header = T)
 summary(sp)
 # convert dataset to xy
 xy <- sp[, c(2:3)]
@@ -36,7 +36,7 @@ xy <- sp[, c(2:3)]
 ## NOTE: environmental data must be a raster stack. all environmental data must have the same extent & resolution
   # create a list of all files within the directory of climate data
     # choose pattern = ".bil" or ".tif" depending on what extension your raster is
-raster_files <- list.files("/Volumes/ANGELO4/ASC_GIS/Layers/Climate/Climate/wc2-2.5m/", full.names = T, pattern = ".tif")
+raster_files <- list.files("/PATH_TO_DIR/CLIMATE_DATA_DIR/", full.names = T, pattern = ".tif")
   # create a raster stack using the list you created
 predictors <- stack(raster_files)
   #  verify
