@@ -82,3 +82,18 @@ ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
     # positive vlaues = a model which present predictions are consistent with the distribution of presences in the evaluation dataset
     # values near zero = the model is not different from a random model
     # negative values = negative values indicate counter predictions, i.e., predicting poor quality areas where presences are more frequent
+
+# determine the Feature Classes of the default Maxent model
+def.results <- getFCs(paste("MxntDflt/", "/maxent.html", sep = "")) # "MxntDflt/" needs to point to the directory where your default model lives
+def.results <- strsplit(def.results, " ")[[1]]
+
+def.results <- lapply(def.results, function(x) gsub("hinge", "H", x))
+def.results <- lapply(def.results, function(x) gsub("linear", "L", x))
+def.results <- lapply(def.results, function(x) gsub("product", "P", x))
+def.results <- lapply(def.results, function(x) gsub("threshold", "T", x))
+def.results <- lapply(def.results, function(x) gsub("quadratic", "Q", x))
+
+def.results <- lapply(def.results, function(x) paste(x, collapse = ""))
+def.results <- paste(unlist(def.results),collapse = "")
+# print the Feature Classes used in the default model
+def.results # "HPLQ"
