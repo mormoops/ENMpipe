@@ -52,14 +52,6 @@ plot(predictors$wc2.1_2.5m_bio_1)
 
 # Create Maxent ENMs using default settings
 
-# extract the Feature Classes from Maxent
-getFCs <- function(html) {
-  htmlRead <- readLines(html)
-  featureTypes <- htmlRead[grep("Feature types", htmlRead)]
-  substr(featureTypes, start=21, stop=nchar(featureTypes)-4)
-}
-
-
 ## -- multiple model testing in maxent & determine best parameters in ENMeval
 setwd("~/NEW_DIR1/NEW_DIR2/") # make sure you are here
   ## i.e. must be one level up from the directory where maxent.html is
@@ -82,6 +74,14 @@ ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
     # positive vlaues = a model which present predictions are consistent with the distribution of presences in the evaluation dataset
     # values near zero = the model is not different from a random model
     # negative values = negative values indicate counter predictions, i.e., predicting poor quality areas where presences are more frequent
+
+
+## extract the Feature Classes from Maxent
+getFCs <- function(html) {
+  htmlRead <- readLines(html)
+  featureTypes <- htmlRead[grep("Feature types", htmlRead)]
+  substr(featureTypes, start=21, stop=nchar(featureTypes)-4)
+}
 
 # determine the Feature Classes of the default Maxent model
 def.results <- getFCs(paste("MxntDflt/", "/maxent.html", sep = "")) # "MxntDflt/" needs to point to the directory where your default model lives
