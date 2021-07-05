@@ -76,7 +76,7 @@ ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
     # negative values = negative values indicate counter predictions, i.e., predicting poor quality areas where presences are more frequent
 
 
-## extract the Feature Classes from Maxent
+## create function to extract the Feature Classes from Maxent
 getFCs <- function(html) {
   htmlRead <- readLines(html)
   featureTypes <- htmlRead[grep("Feature types", htmlRead)]
