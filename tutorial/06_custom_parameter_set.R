@@ -12,12 +12,14 @@ dir.create("OUTPUT_DIR/ENM_EVAL_DIR")
 
 
 library(ENMeval)
+library(maxnet)
 # 5A run ENMeval using the following test parameters
 # Regularization Multiplier: "0.5, 1, 1.5", "2"
 # Feature classes: c("L", "LQ", "H", "LQH", "LQHP", "LQHPT")
 # this combination will create 18 model evaluations: RM *3 & FC *6
-eval.results <- ENMevaluate(occ = xy, env = predictors, RMvalues = seq(0.5, 2, 0.5), 
-                            fc = c("L", "LQ", "H"), method = 'block')
+eval.results <- ENMevaluate(occs = xy, envs = predictors,  
+                    algorithm = 'maxnet', partitions = 'block', 
+                    tune.args = list(fc = c("L","LQ","LQH","H"), rm = 1:3))
    ### the multiple parameter comparisons will run for ~10–15 min in a regular 4 core laptop ###
 
 # table of ENMeval results
