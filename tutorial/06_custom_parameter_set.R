@@ -25,22 +25,23 @@ eval.results <- ENMevaluate(occs = xy, envs = predictors,
 
 # table of ENMeval results
 head(eval.results@results)
-  # save the results for later reference
+  # save table of results for later use
+write.csv(eval.results@results, file = "eval.results.csv", row.names = F)
 
-# get the best model based on AIC
+#5A.2. obtain the best model based on AIC
 AICmods <- which(eval.results@results$AICc == min(na.omit(eval.results@results$AICc)))
 eval.results@results[AICmods, ]
-  # note the best model AICc = #####.
-  # note custom parameter settings for the best model: RM = ## & FC = ###
-# get the default model features
+  # for this dataset, the best was model had AICc = ###
+  # custom parameter settings for this model are: RM = ## & FC = ###
+  # compare it with the default model above
 def.results
-# note the difference in AICc
+# see the difference in AICc
   # list the FC tested and find the position of the one that matches the default model
 eval.results@results[["fc"]]
   # list the AICc values and identify the AIC.c of your default model
 eval.results@results[["AICc"]]
-  # note the default AICc = #####. 
-  # the model with the lowr AICc is selected as the best model
+  # the default AICc = #### 
+  # the lower AICc value indicates the best model
 
 # plot ENMeval model comparisons
 evalplot.stats(e = eval.results, stats = "or.mtp", color = "fc", x.var = "rm")
