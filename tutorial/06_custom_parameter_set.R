@@ -1,14 +1,14 @@
 ###
 # this section is meant to be run right after section 05
-# a default maxent model is needed to obtain and then set custom parameters
+# a default maxent model is needed to obtain the parameters for comparison
 
 ### 
 
-# fine tune model parameters and create a single run tuned Maxent model
 # use ENMeval to do multiple model testing in maxent & determine best parameters
 
-# create a directory for the ENMeval results
+# create a directory to save the ENMeval results
 dir.create("OUTPUT_DIR/ENM_EVAL_DIR")
+setwd("ENM_EVAL_DIR")
 
 
 library(ENMeval)
@@ -20,14 +20,16 @@ library(maxnet)
 eval.results <- ENMevaluate(occs = xy, envs = predictors,  
                     algorithm = 'maxnet', partitions = 'block', 
                     tune.args = list(fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"), rm = 1:3))
-   ### the multiple parameter comparisons will run for ~10–15 min in a regular 4 core laptop ###
+      ### if dismo::maxent is preferred, change algorithm = "maxent.jar"
+      ### the multiple parameter comparisons will run for ~10–15 min in a regular 4 core laptop ###
 
 # table of ENMeval results
 head(eval.results@results)
+  # save the results for later reference
 
 # get the best model based on AIC
 AICmods <- which(eval.results@results$AICc == min(na.omit(eval.results@results$AICc)))
-AICmods[ , c(1,2,16)]
+eval.results@results[AICmods, ]
   # note the best model AICc = #####.
   # note custom parameter settings for the best model: RM = ## & FC = ###
 # get the default model features
