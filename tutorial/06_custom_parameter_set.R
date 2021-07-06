@@ -51,7 +51,7 @@ evalplot.stats(e = eval.results, stats = "auc.val", color = "fc", x.var = "rm")
 # improve Maxent model ussing custom parameters
   # get the custom parameters from above
 setwd("PATH_TO_OUTPUT_DIR/")
-  # make single run model using ALL species points. save in new directory
+  # make single run model using ALL species points
 mxnt.best <- maxent(predictors, xy, args = c("linear=true", "quadratic=true", "product=true", 
                                            "hinge=true", "threshold=false", "betamultiplier=1"), path = "Mxnt_Cust1/")
     ## NOTE: change the args specifically to the parameters obtained from ENMevaluate above
