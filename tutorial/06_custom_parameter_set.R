@@ -65,5 +65,5 @@ response(mxnt.best)
 mxnt.best.dist.log <- predict(mxnt.best, predictors, args = c("outputformat=logistic"), progress = "text")
     # NOTES: change outputformat options "=raw" or "=logistic" or "=coglog"
 # plot predicted models for visual comparison
-plot(mxnt.best.dist.log, main = "Best Model")
-plot(mxnt.dflt, main = "Default Model")
+plot(mxnt.best.dist.log, main = "Best Model", xlab = "longitude", ylab = "latitude")
+plot(mxnt.dflt, main = "Default Model", xlab = "longitude", ylab = "latitude")
