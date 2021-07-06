@@ -13,41 +13,37 @@ dir.create("OUTPUT_DIR/ENM_EVAL_DIR")
 
 library(ENMeval)
 library(maxnet)
-# 5A run ENMeval using the following test parameters
-# Regularization Multiplier: "0.5, 1, 1.5", "2"
-# Feature classes: c("L", "LQ", "H", "LQH", "LQHP", "LQHPT")
+# run ENMeval using different test parameters
+# example: rm = regularization Multiplier: "0.5, 1, 1.5", "2"
+# example: fc = feature classes: c("L", "LQ", "H", "LQH", "LQHP", "LQHPT")
 # this combination will create 18 model evaluations: RM *3 & FC *6
 eval.results <- ENMevaluate(occs = xy, envs = predictors,  
                     algorithm = 'maxnet', partitions = 'block', 
-                    tune.args = list(fc = c("L","LQ","LQH","H"), rm = 1:3))
+                    tune.args = list(fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"), rm = 1:3))
    ### the multiple parameter comparisons will run for ~10–15 min in a regular 4 core laptop ###
 
 # table of ENMeval results
-head(eval.results@results) 
+head(eval.results@results)
 
-# obtain the best model based on AIC
+# get the best model based on AIC
 AICmods <- which(eval.results@results$AICc == min(na.omit(eval.results@results$AICc)))
-eval.results@results[AICmods, ]
-  # note the best model and the AICc score
-  # note custom parameter settings for best model: RM = ## & FC = ##
-  # compare it with the default model above
+AICmods[ , c(1,2,16)]
+  # note the best model AICc = #####.
+  # note custom parameter settings for the best model: RM = ## & FC = ###
+# get the default model features
 def.results
-  # see the difference in AICc
+# note the difference in AICc
   # list the FC tested and find the position of the one that matches the default model
-eval.results@results[["features"]]
+eval.results@results[["fc"]]
   # list the AICc values and identify the AIC.c of your default model
 eval.results@results[["AICc"]]
-  # note the default AICc = ###. 
-  # the lower AICc value indicates the best model
+  # note the default AICc = #####. 
+  # the model with the lowr AICc is selected as the best model
 
 # plot ENMeval model comparisons
-    # par(mfrow=c(2,3)) # may use to plot in single panel
-eval.plot(eval.results@results)
-eval.plot(eval.results@results, "avg.test.AUC", legend = F)
-eval.plot(eval.results@results, "train.AUC", legend = F)
-eval.plot(eval.results@results, "avg.diff.AUC", legend = F)
-eval.plot(eval.results@results, "avg.test.orMTP", legend = F)
-eval.plot(eval.results@results, "avg.test.or10pct", legend = F)
+evalplot.stats(e = eval.results, stats = "or.mtp", color = "fc", x.var = "rm")
+evalplot.stats(e = eval.results, stats = "auc.val", color = "fc", x.var = "rm")
+
 
 # improve Maxent model ussing custom parameters
   # get the custom parameters
