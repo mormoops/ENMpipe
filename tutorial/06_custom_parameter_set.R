@@ -54,6 +54,8 @@ setwd("PATH_TO_OUTPUT_DIR/")
   # make single run model using ALL species points. save in new directory
 mxnt.best <- maxent(predictors, xy, args = c("linear=true", "quadratic=true", "product=true", 
                                            "hinge=true", "threshold=false", "betamultiplier=1"), path = "Mxnt_Cust1/")
+    ## NOTE: change the args specifically to the parameters obtained from ENMevaluate above
+
 # check variable contribution
 plot(mxnt.best)
 # check response curves
