@@ -28,7 +28,7 @@ head(eval.results@results)
   # save table of results for later use
 write.csv(eval.results@results, file = "eval.results.csv", row.names = F)
 
-#5A.2. obtain the best model based on AIC
+# obtain the best model based on AIC
 AICmods <- which(eval.results@results$AICc == min(na.omit(eval.results@results$AICc)))
 eval.results@results[AICmods, ]
   # for this dataset, the best was model had AICc = ###
@@ -49,32 +49,19 @@ evalplot.stats(e = eval.results, stats = "auc.val", color = "fc", x.var = "rm")
 
 
 # improve Maxent model ussing custom parameters
-  # get the custom parameters
-  # call AICmods
-AICmods <- which(eval.results@results$AICc == min(na.omit(eval.results@results$AICc)))[1]
-  # convert AICmods into a data.frame
-AICmods <- eval.results@results[AICmods,]
-  # Get the Feature Classes from the best model
-FC_best <- as.character(AICmods$features[1])
-  # get the Regularization Multiplier from the best model
-RM_best <- AICmods$rm
+  # get the custom parameters from above
+setwd("/Users/angelo/MaxEnt/Outputs/")
+  # make single run model using ALL species points
+mxnt.best <- maxent(predictors, xy, args = c("linear=true", "quadratic=true", "product=true", 
+                                           "hinge=true", "threshold=false", "betamultiplier=1"), path = "Mxnt_Cust1/")
+# check variable contribution
+plot(mxntmod)
+# check response curves
+response(mxntmod)
 
-# build a single-run custom Maxent model
-  # set the parameters for the custom Maxent model
-maxent.args <- make.args(RMvalues = RM_best, fc = FC_best)
-
-  # run the custom Maxent model with the ENMeval best parameters and save in new directory
-mxnt.best <- maxent(predictors, xy, args = maxent.args[[1]],
-                         path = "Mxnt_Best/") # indicate an appropriate path to save results
-  # create a prediction across geographic space of your custom Maxent model 
-best.dist <- predict(mxnt.best, predictors, overwrite = T, progress = 'text')
-
-  # examine both predicted distributions side by side
-plot(dflt.dist, col = viridis::viridis(99), main = "Default Model")
-plot(best.dist, col = viridis::viridis(99), main = "Best Model")
-
-  # examine variable contribution for the best model
-plot(mxnt.best)
-  # examine the response curves for the best model
-response(mxnt.best)
-
+# make model prediction
+mxnt.best.dist.log <- predict(mxntmod, predictors, args = c("outputformat=logistic"), progress = "text")
+    # NOTES: change outputformat options "=raw" or "=logistic" or "=coglog"
+# plot predicted models for visual comparison
+plot(mxnt.best.dist.log, main = "Best Model")
+plot(mxnt.dflt, main = "Default Model")
