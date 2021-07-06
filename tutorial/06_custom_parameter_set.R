@@ -50,17 +50,17 @@ evalplot.stats(e = eval.results, stats = "auc.val", color = "fc", x.var = "rm")
 
 # improve Maxent model ussing custom parameters
   # get the custom parameters from above
-setwd("/Users/angelo/MaxEnt/Outputs/")
-  # make single run model using ALL species points
+setwd("PATH_TO_OUTPUT_DIR/")
+  # make single run model using ALL species points. save in new directory
 mxnt.best <- maxent(predictors, xy, args = c("linear=true", "quadratic=true", "product=true", 
                                            "hinge=true", "threshold=false", "betamultiplier=1"), path = "Mxnt_Cust1/")
 # check variable contribution
-plot(mxntmod)
+plot(mxnt.best)
 # check response curves
-response(mxntmod)
+response(mxnt.best)
 
 # make model prediction
-mxnt.best.dist.log <- predict(mxntmod, predictors, args = c("outputformat=logistic"), progress = "text")
+mxnt.best.dist.log <- predict(mxnt.best, predictors, args = c("outputformat=logistic"), progress = "text")
     # NOTES: change outputformat options "=raw" or "=logistic" or "=coglog"
 # plot predicted models for visual comparison
 plot(mxnt.best.dist.log, main = "Best Model")
