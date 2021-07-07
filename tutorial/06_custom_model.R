@@ -60,6 +60,9 @@ mxnt.best <- maxent(predictors, xy, args = c("linear=true", "quadratic=true", "p
 plot(mxnt.best)
 # check response curves
 response(mxnt.best)
+# calculate Boyce index
+ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
+  # boyce index statistic is the Spearman.cor value = ####
 
 # make model prediction
 mxnt.best.dist.log <- predict(mxnt.best, predictors, args = c("outputformat=logistic"), progress = "text")
