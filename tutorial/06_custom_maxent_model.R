@@ -61,7 +61,7 @@ plot(mxnt.best)
 # check response curves
 response(mxnt.best)
 # calculate Boyce index
-ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
+ecospat.boyce(mxnt.best, xy, window.w = "default", res = 100, PEplot = T)
   # boyce index statistic is the Spearman.cor value = ####
 
 # make model prediction
