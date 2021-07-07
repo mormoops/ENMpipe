@@ -36,5 +36,8 @@ predictors_past <- crop(predictors_past, geo.extent)
   # examine cropped raster files
 plot(predictors_past$RASTER-NAME)
 
-  ## NOTE: this section is repetitive and can be used to get past or present climate projections OR using present data with a different spatial extent
+  ## NOTE: this section is repetitive and can be used to get past or future climate projections to examine distributions under climate change OR 
+  ## using present data with a different geospatial extent to examine distributions under different spatial extent (e.g. invasive species range)
+
+
 
