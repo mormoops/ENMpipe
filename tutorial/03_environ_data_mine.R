@@ -13,6 +13,7 @@ plot(bioclim.data$bio1)
 
   # create a geographic extent for your study area
     # change lon/lat coordinates
+      # coordinates in order: xmin, xmax, ymin, ymax)
 geo.extent <- extent(-86, -65, 16, 27) # e.g. Greater Antilles
 
   # crop bioclim predictors to the geographic extent
