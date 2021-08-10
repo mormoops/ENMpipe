@@ -40,14 +40,44 @@ raster_files <- list.files("/PATH_TO_DIR/CLIMATE_DATA_DIR/", full.names = T, pat
   # create a raster stack using the list you created
 predictors <- stack(raster_files)
   #  verify
-plot(predictors$wc2.1_2.5m_bio_1)
+plot(predictors$NAME_PREDICTOR)
 
-  # create regional extent (xmn, xmx, ymn, ymx)
-geo.extent <- extent(-125, -66, 24, 50) # example
-  # crop predictors
-predictors <- crop(predictors, geo.extent)
+  # create two regional extents
+    # 1. extent to calibrate maxent model
+    # 2. extent to project maxent model
+  # calibration extent: create a 5 degree radius buffer around species occurrence data.frame
+    # requires to convert occurrence data into a GIS object
+library(sf)
+  # convert the species points into sf object
+sp.sf <- st_as_sf(xy, coords = c("lon","lat"), crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+summary(sp.sf) # examine 
+class(sp.sf)  # examine 
+crs(predictors) <- raster::crs(sp.sf) # match the predictor & species CRS.
+
+# create a buffer on the species points with a 5 degree distance, then unite all buffer circles and convert to sf
+sp.buf <- sf::st_buffer(sp.sf, dist = 5) %>% sf::st_union() %>% sf::st_sf()
+  # NOTE: it will show a message that it is not projected, but that is OK
+#  verify the full predictors
+plot(predictors[[1]], main = names(predictors)[1])
+# add the species points 
+points(xy)
+# add the buffer 
+  # NOTE: use add = TRUE to include in the current plot
+plot(sp.buf, border = "blue", lwd = 3, add = TRUE)
+# crop the predictors based on the buffer
+predictors1 <- crop(predictors, sp.buf)
+  # create a mask to remove the area outside the predictors
+predictors1 <- raster::mask(predictors1, sp.buf)
+  # verify predictors were properly cropped
+plot(predictors1$NAME_PREDICTOR)
+
+  # projection extent: add a 10 degree square buffer to the max min lon lat coordinates from species occurrence data.frame
+    # 10 degrees = ~1110 km
+geo.ext.sqbuff <- extent(min(sp$lon)-10, max(sp$lon)+10, min(sp$lat)-10, max(sp$lat)+10) # example
+  # crop original predictors
+predictors2 <- crop(predictors, geo.ext.sqbuff)
   # verify by plotting one of the predictors
-plot(predictors$wc2.1_2.5m_bio_1)
+plot(predictors2$NAME_PREDICTOR)
 
 
 # Create Maxent ENMs using default settings
@@ -96,4 +126,5 @@ def.results <- lapply(def.results, function(x) gsub("quadratic", "Q", x))
 def.results <- lapply(def.results, function(x) paste(x, collapse = ""))
 def.results <- paste(unlist(def.results),collapse = "")
 # print the Feature Classes used in the default model
-def.results # "HPLQ"
+def.results 
+# "HPLQ"
