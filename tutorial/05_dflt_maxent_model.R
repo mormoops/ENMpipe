@@ -79,6 +79,8 @@ predictors2 <- crop(predictors, geo.ext.sqbuff)
   # verify by plotting one of the predictors
 plot(predictors2$NAME_PREDICTOR)
 
+  ## NOTES: this points out to creating a single projection extent using present environmental data. additional projection extents can be created for 
+  ## different time periods or spatial scales
 
 # Create Maxent ENMs using default settings
 
