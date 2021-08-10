@@ -72,8 +72,8 @@ predictors1 <- raster::mask(predictors1, sp.buf)
 plot(predictors1$NAME_PREDICTOR)
 
   # projection extent: add a 10 degree square buffer to the max min lon lat coordinates from species occurrence data.frame
-    # 10 degrees = ~1110 km
-geo.ext.sqbuff <- extent(min(sp$lon)-10, max(sp$lon)+10, min(sp$lat)-10, max(sp$lat)+10) # example
+    # 10 degrees = ~1110 km (choose other if appropriate)
+geo.ext.sqbuff <- extent(min(xy$lon)-10, max(xy$lon)+10, min(xy$lat)-10, max(xy$lat)+10) # example
   # crop original predictors
 predictors2 <- crop(predictors, geo.ext.sqbuff)
   # verify by plotting one of the predictors
@@ -87,18 +87,18 @@ setwd("~/NEW_DIR1/NEW_DIR2/") # make sure you are here
   ## i.e. must be one level up from the directory where maxent.html is
 
 # create the Maxent model
-sp.mxnt.dflt <- maxent(predictors, xy, path = "./NEW_DIR3") # use path to create new directory
+mxnt.dflt <- maxent(predictors1, xy, path = "./NEW_DIR3") # use path to create new directory
 
-# create a raster of your Maxent model prediction
-sp.dflt.dist <- predict(sp.mxnt.dflt, predictors, progress = 'text')
+# create the Maxent model prediction
+dflt.dist <- predict(mxnt.dflt, predictors2, progress = 'text')
 # examine the predicted distribution
-plot(sp.dflt.dist)
+plot(dflt.dist)
 
   # test the prediction accuracy 
   # note that in Maxent.html results you can find the AUC value. to test the predictive accuracy of the model
   # use an independent measure for presence-only data: Boyce Index (Hizrel et al 2006) as implemented in Ecospat
 library(ecospat)
-ecospat.boyce(sp.dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
+ecospat.boyce(dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
   # boyce index statistic is the Spearman.cor value (= 0.991)
     # goes between -1 to +1 
     # positive vlaues = a model which present predictions are consistent with the distribution of presences in the evaluation dataset
@@ -114,7 +114,7 @@ getFCs <- function(html) {
 }
 
 # determine the Feature Classes of the default Maxent model
-def.results <- getFCs(paste("MxntDflt/", "/maxent.html", sep = "")) # "MxntDflt/" needs to point to the directory where your default model lives
+def.results <- getFCs(paste("MxntDflt/", "/maxent.html", sep = "")) # "MxntDflt/" needs to point to the directory where your default model lives (i.e. NEW_DIR3)
 def.results <- strsplit(def.results, " ")[[1]]
 
 def.results <- lapply(def.results, function(x) gsub("hinge", "H", x))
