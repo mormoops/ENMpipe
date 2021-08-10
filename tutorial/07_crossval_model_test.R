@@ -1,31 +1,23 @@
-#####################
-## under construction
-#####################
+###
+# this section is meant to be run right after section 06
+# a custom maxent model is needed 
+
+### 
 
 
-# improve Maxent model ussing custom parameters
-  # get the custom parameters from above
+# evaluate Maxent model using a k-fold cross validation approach
 setwd("PATH_TO_OUTPUT_DIR/")
   # make single run model using ALL species points
-mxnt.best <- maxent(predictors1, xy, args = c("linear=true", "quadratic=true", "product=true", 
-                                           "hinge=true", "threshold=false", "betamultiplier=1"), path = "Mxnt_Cust1/")
-    ## NOTE: change the args specifically to the parameters obtained from ENMevaluate above
+mxnt.cv <- maxent(predictors1, xy, args = c("linear=true", "quadratic=true", "product=true", "hinge=true", 
+                                            "threshold=false", "betamultiplier=1", "replicates=5", 
+                                            "outputgrids=FALSE"), path = "Mxnt_Cval/")
+    ## NOTES: this model uses the tuning parameters obtained from ENMevaluate (section 06). 
+    ## the args "replicates=5" refers to the number of cross validation replicates (i.e. 5). this may be changed depending on the number of species observations
+    ## the args "outputgrids=FALSE" refers to write each k-fold replicate model or not. 
 
-# check variable contribution
-plot(mxnt.best)
-# check response curves
-response(mxnt.best)
-# calculate Boyce index
-ecospat.boyce(mxnt.best, xy, window.w = "default", res = 100, PEplot = T)
-  # boyce index statistic is the Spearman.cor value = ####
-  # note the ROC AUC value from the maxent.html file. AUC = ####
 
 # make model prediction
-mxnt.best.dist.log <- predict(mxnt.best, predictors2, args = c("outputformat=cloglog"), progress = "text")
-    # NOTES: change outputformat options "=raw" or "=logistic" or "=cloglog"
-# plot predicted models for visual comparison
-plot(mxnt.best.dist.log, main = "Best Model", xlab = "longitude", ylab = "latitude")
-plot(mxnt.dflt, main = "Default Model", xlab = "longitude", ylab = "latitude")
-
-### NOTE: this approach will create a maxent model with species specific tuned parameters using all observation records. 
-### to further evaluate this model's performance, follow the cross validation steps in section 07
+mxnt.cv.dist <- predict(mxnt.cv, predictors2, args = c("outputformat=cloglog", "outputgrids=FALSE"), progress = "text") ## this will spit out separate models for each replicate, not one summary 
+    ## NOTES: change outputformat options "=raw" or "=logistic" or "=cloglog"
+    ## after cross validation is performed, examine the average AUC value and compare with the model created using the full dataset
+    ## this does not lead to plotting the average model produced by cross validation because in theory the model produced using the full dataset (section 06) should generalise better
