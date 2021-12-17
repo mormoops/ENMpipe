@@ -13,4 +13,6 @@ Uses for different steps of the pipe include:
 - estimates of niche overlap and quantification of niche dynamics
 
 
-Pipe scripts and tutorial under construction. Maintained by: @Mormoops
+Pipe scripts and tutorial modified frequently. Maintained by: @Mormoops
+
+To cite: Soto-Centeno, J.A. (2021) ENMpipe: a tutorial pipeline for building ecological niche models. https://github.com/mormoops
