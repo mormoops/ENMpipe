@@ -17,4 +17,4 @@ Uses for different steps of the pipe include:
 
 Pipe scripts and tutorial modified frequently. Maintained by: @Mormoops
 
-To cite: Soto-Centeno, J.A. (2021) ENMpipe: a tutorial pipeline for building and testing ecological niche models. DOI:10.5281/zenodo.6256922
+To cite: Soto-Centeno, J.A. (2022) ENMpipe: a tutorial pipeline for building and testing ecological niche models. DOI:10.5281/zenodo.6256922
