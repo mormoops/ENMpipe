@@ -1,4 +1,4 @@
-
+<a href="https://zenodo.org/badge/latestdoi/273701814"><img src="https://zenodo.org/badge/273701814.svg" alt="DOI"></a>
 
 ## ENMpipe
 #### A pipeline for developing and testing Ecological Niche Models (ENM): from data mining to pub ready plots.
