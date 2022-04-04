@@ -106,6 +106,8 @@ ecospat.boyce(dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
     # positive vlaues = a model which present predictions are consistent with the distribution of presences in the evaluation dataset
     # values near zero = the model is not different from a random model
     # negative values = negative values indicate counter predictions, i.e., predicting poor quality areas where presences are more frequent
+    # NOTE on Issue: a likely source of error in Boyce index calculation is improperly wrangled observation data; this causes NAs to appear in the Maxent model. 
+      # Solution: ensure all species observations are within the boundaries of climate data <i>before modeling<i\>.
 
 
 ## create function to extract the Feature Classes from Maxent
