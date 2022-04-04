@@ -1,7 +1,7 @@
 ###
 
 # this section is meant to be run right after section 06 or 07
-# this is redundant with the projections methods in section 06 and meant to exeplify how to use different projections
+# this is redundant with the projections methods in section 06 and meant to exeplify how to use projections for different time scales
 # a maxent model with species specific parameter tuning is needed to produce space or time model projections
 
 ### 
