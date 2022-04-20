@@ -99,6 +99,7 @@ plot(dflt.dist)
   # test the prediction accuracy 
   # note that in Maxent.html results you can find the AUC value. to test the predictive accuracy of the model
   # use an independent measure for presence-only data: Boyce Index (Hizrel et al 2006) as implemented in Ecospat
+  # IMPORTANT NOTE: the species observations (i.e. point localities / xy object) used MUST be within the projected disribution. Otherwise, NAs will be produced.
 library(ecospat)
 ecospat.boyce(dflt.dist, xy, window.w = "default", res = 100, PEplot = T)
   # boyce index statistic is the Spearman.cor value (= 0.991)
